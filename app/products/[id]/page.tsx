@@ -12,6 +12,13 @@ import { useToast } from "@/contexts/ToastContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { products } from "@/utils/products";
 
+// 정적 내보내기를 위한 generateStaticParams 함수
+export function generateStaticParams() {
+  return products.map((product) => ({
+    id: product.id.toString(),
+  }));
+}
+
 export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
