@@ -267,10 +267,10 @@ export default function CoffeeGroundsPage() {
                 stiffness: 500,
                 damping: 40
               }}
-              className="w-[calc(100vw-4rem)] sm:w-96 max-w-[calc(100vw-4rem)] sm:max-w-96 h-auto max-h-[calc(100vh-2rem)] bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-r-2xl shadow-2xl border-r border-t border-b border-emerald-200/50 dark:border-emerald-700/30 overflow-hidden"
+              className="w-[calc(100vw-4rem)] sm:w-96 max-w-[calc(100vw-4rem)] sm:max-w-96 h-auto max-h-[calc(100vh-4rem)] bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-r-2xl shadow-2xl border-r border-t border-b border-emerald-200/50 dark:border-emerald-700/30 overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
-            <div className="p-5 sm:p-6 overflow-y-auto max-h-[calc(100vh-2rem)]">
+            <div className="p-5 sm:p-6 overflow-y-auto flex-1 min-h-0" style={{ maxHeight: 'calc(100vh - 4rem)' }}>
               {/* 뉴스 탭 선택 */}
               <div className="flex gap-2 mb-4">
                 <button
