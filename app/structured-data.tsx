@@ -1,14 +1,12 @@
 export function StructuredData() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-  const basePath = process.env.GITHUB_ACTIONS === 'true' ? '/coffee-grounds-recycling' : ''
-  const fullBaseUrl = baseUrl + basePath
   
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "커피박 재활용",
-    "url": fullBaseUrl,
-    "logo": `${fullBaseUrl}/logo.png`,
+    "url": baseUrl,
+    "logo": `${baseUrl}/logo.png`,
     "description": "커피찌꺼기를 활용한 친환경 재활용 솔루션",
     "contactPoint": {
       "@type": "ContactPoint",
@@ -31,12 +29,12 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "커피박 재활용",
-    "url": fullBaseUrl,
+    "url": baseUrl,
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": `${fullBaseUrl}/?search={search_term_string}`
+        "urlTemplate": `${baseUrl}/?search={search_term_string}`
       },
       "query-input": "required name=search_term_string"
     }
