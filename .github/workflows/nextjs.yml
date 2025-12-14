@@ -74,7 +74,12 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: |
+          echo "Building with environment variables:"
+          echo "NODE_ENV=$NODE_ENV"
+          echo "GITHUB_ACTIONS=$GITHUB_ACTIONS"
+          echo "NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL"
+          ${{ steps.detect-package-manager.outputs.runner }} next build
         env:
           NODE_ENV: production
           GITHUB_ACTIONS: 'true'
