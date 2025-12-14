@@ -4,7 +4,6 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Coffee, ArrowLeft, ShoppingCart, Palette, Sparkles, CheckCircle, Star, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import CoffeeParticleScene from "@/components/CoffeeParticleScene";
 import { useCart } from "@/contexts/CartContext";
@@ -108,14 +107,13 @@ export default function ProductsPage() {
               >
                 <div className="mb-4 text-center flex items-center justify-center min-h-[200px] relative">
                   {product.image.startsWith('/') ? (
-                    <Image
+                    <img
                       src={product.image.replace(/#/g, '%23')}
                       alt={product.name}
                       width={200}
                       height={200}
                       className="object-contain rounded-lg max-w-full max-h-[200px]"
                       loading="lazy"
-                      unoptimized
                       onError={(e) => {
                         console.error('Image load error:', product.image);
                         const target = e.target as HTMLImageElement;
