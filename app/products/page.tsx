@@ -17,6 +17,16 @@ export default function ProductsPage() {
   const [selectedColors, setSelectedColors] = useState<Record<number, number>>({});
   const { addToCart, getTotalItems } = useCart();
   const { showSuccess } = useToast();
+  
+  // basePath 감지 (GitHub Pages용)
+  const basePath = typeof window !== 'undefined' && window.location.pathname.startsWith('/coffee-grounds-recycling') 
+    ? '/coffee-grounds-recycling' 
+    : '';
+  
+  const getImageSrc = (imagePath: string) => {
+    if (!imagePath.startsWith('/')) return imagePath;
+    return basePath + imagePath.replace(/#/g, '%23');
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -108,14 +118,14 @@ export default function ProductsPage() {
                 <div className="mb-4 text-center flex items-center justify-center min-h-[200px] relative">
                   {product.image.startsWith('/') ? (
                     <img
-                      src={product.image.replace(/#/g, '%23')}
+                      src={getImageSrc(product.image)}
                       alt={product.name}
                       width={200}
                       height={200}
                       className="object-contain rounded-lg max-w-full max-h-[200px]"
                       loading="lazy"
                       onError={(e) => {
-                        console.error('Image load error:', product.image);
+                        console.error('Image load error:', product.image, 'Resolved:', getImageSrc(product.image));
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
                         const parent = target.parentElement;

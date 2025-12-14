@@ -22,6 +22,16 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
   const { isDark, toggleTheme, mounted } = useTheme();
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(0);
+  
+  // basePath 감지 (GitHub Pages용)
+  const basePath = typeof window !== 'undefined' && window.location.pathname.startsWith('/coffee-grounds-recycling') 
+    ? '/coffee-grounds-recycling' 
+    : '';
+  
+  const getImageSrc = (imagePath: string) => {
+    if (!imagePath.startsWith('/')) return imagePath;
+    return basePath + imagePath.replace(/#/g, '%23');
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -102,14 +112,14 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 <div className="mb-6 flex items-center justify-center min-h-[400px] relative">
                   {product.image.startsWith('/') ? (
                     <img
-                      src={product.image.replace(/#/g, '%23')}
+                      src={getImageSrc(product.image)}
                       alt={product.name}
                       width={500}
                       height={500}
                       className="object-contain rounded-lg max-w-full max-h-[500px]"
                       loading="lazy"
                       onError={(e) => {
-                        console.error('Image load error:', product.image);
+                        console.error('Image load error:', product.image, 'Resolved:', getImageSrc(product.image));
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
                         const parent = target.parentElement;
