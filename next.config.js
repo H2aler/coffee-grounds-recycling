@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const isGithubPages = process.env.NODE_ENV === 'production';
+const isGithubPages = process.env.GITHUB_ACTIONS === 'true';
 const basePath = isGithubPages ? '/coffee-grounds-recycling' : '';
 const assetPrefix = isGithubPages ? '/coffee-grounds-recycling' : '';
 
