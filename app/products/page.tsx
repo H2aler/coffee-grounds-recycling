@@ -109,9 +109,7 @@ export default function ProductsPage() {
                 <div className="mb-4 text-center flex items-center justify-center min-h-[200px] relative">
                   {product.image.startsWith('/') ? (
                     <Image
-                      src={product.image.split('/').map((part, index) => 
-                        index === 0 ? part : encodeURIComponent(part)
-                      ).join('/')}
+                      src={product.image.replace(/#/g, '%23')}
                       alt={product.name}
                       width={200}
                       height={200}
@@ -119,6 +117,7 @@ export default function ProductsPage() {
                       loading="lazy"
                       unoptimized
                       onError={(e) => {
+                        console.error('Image load error:', product.image);
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
                         const parent = target.parentElement;
