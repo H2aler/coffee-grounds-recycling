@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
+const isGithubPages = process.env.NODE_ENV === 'production';
+const basePath = isGithubPages ? '/coffee-grounds-recycling' : '';
+const assetPrefix = isGithubPages ? '/coffee-grounds-recycling' : '';
+
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
-  // basePath and images.unoptimized are automatically set by GitHub Actions
-  // when using actions/configure-pages@v5 with static_site_generator: next
+  basePath: basePath,
+  assetPrefix: assetPrefix,
   images: {
     unoptimized: true,
   },
