@@ -216,7 +216,7 @@ export default function CoffeeGroundsPage() {
 
       {/* 갤럭시 엣지 패널 스타일 (좌측 상단) */}
       {showNewsWidget && (
-        <div ref={edgePanelRef} className="fixed left-0 top-4 sm:top-6 z-50 flex items-start">
+        <div ref={edgePanelRef} className="fixed left-0 top-20 sm:top-24 z-50 flex items-start">
           {/* 핸들 (항상 보임 - 세로 NEWS 텍스트) */}
           <motion.button
             onClick={(e) => {
