@@ -14,6 +14,7 @@ export interface Product {
   features: string[];
   colors: ProductColor[];
   image: string;
+  externalImageUrl?: string; // 마스티체 사이트에서 가져올 이미지 URL
   sizes: string[];
   coverage: string;
   dryTime: string;
@@ -44,6 +45,7 @@ export const products: Product[] = [
       { name: "라이트 그레이", code: "#D3D3D3" }
     ],
     image: "/masicie_pic/table_stool_set.jpg",
+    externalImageUrl: "https://mastice.co.kr/web/product/big/202507/7b6f1b1eaccb32db56761f7971c1282b.jpg",
     sizes: ["테이블 + 스툴 세트", "테이블 단품", "스툴 단품"],
     coverage: "테이블: H 760mm × W 600mm / 스툴: H 400mm × W 400mm",
     dryTime: "맞춤 제작: 주문 후 2주 이내 발송",
@@ -72,6 +74,7 @@ export const products: Product[] = [
       { name: "네추럴 그레이", code: "#808080" }
     ],
     image: "/masicie_pic/Mastice_Portfolio#141.jpg",
+    externalImageUrl: "https://mastice.co.kr/web/product/big/202507/03063f1081b3b64185412a3c7588a3ea.jpg",
     sizes: ["맞춤 제작", "표준 사이즈", "대형 사이즈"],
     coverage: "맞춤 제작 가능 (사이즈 문의)",
     dryTime: "맞춤 제작: 주문 후 2-3주 이내 발송",
@@ -100,6 +103,7 @@ export const products: Product[] = [
       { name: "아트 화이트", code: "#F5F5F0" }
     ],
     image: "/masicie_pic/Mastice_Portfolio#129.jpg",
+    externalImageUrl: "https://mastice.co.kr/web/product/big/202504/b8ac288a2edfaf30b70d0a315ef2ed02.jpg",
     sizes: ["맞춤 제작", "표준 사이즈", "대형 사이즈"],
     coverage: "맞춤 제작 가능 (사이즈 문의)",
     dryTime: "맞춤 제작: 주문 후 2-3주 이내 발송",

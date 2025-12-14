@@ -28,9 +28,35 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
     ? '/coffee-grounds-recycling' 
     : '';
   
-  const getImageSrc = (imagePath: string) => {
-    if (!imagePath.startsWith('/')) return imagePath;
-    return basePath + imagePath.replace(/#/g, '%23');
+  const getImageSrc = () => {
+    // 외부 이미지 URL이 있으면 우선 사용 (마스티체 사이트에서 직접 가져옴)
+    if (product.externalImageUrl) {
+      return product.externalImageUrl;
+    }
+    // 로컬 이미지 fallback
+    if (product.image.startsWith('/')) {
+      return basePath + product.image.replace(/#/g, '%23');
+    }
+    return product.image;
+  };
+  
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    
+    // 외부 이미지 실패 시 로컬 이미지로 fallback
+    if (product.externalImageUrl && product.image.startsWith('/')) {
+      target.src = basePath + product.image.replace(/#/g, '%23');
+      target.onerror = null; // 무한 루프 방지
+      return;
+    }
+    
+    // 최종 실패
+    console.error('Image load error:', product.name);
+    target.style.display = 'none';
+    const parent = target.parentElement;
+    if (parent) {
+      parent.innerHTML = '<div class="text-9xl">🖼️</div>';
+    }
   };
 
   useEffect(() => {
@@ -110,27 +136,16 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             >
               <div className="text-center w-full">
                 <div className="mb-6 flex items-center justify-center min-h-[400px] relative">
-                  {product.image.startsWith('/') ? (
-                    <img
-                      src={getImageSrc(product.image)}
-                      alt={product.name}
-                      width={500}
-                      height={500}
-                      className="object-contain rounded-lg max-w-full max-h-[500px]"
-                      loading="lazy"
-                      onError={(e) => {
-                        console.error('Image load error:', product.image, 'Resolved:', getImageSrc(product.image));
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent) {
-                          parent.innerHTML = '<div class="text-9xl">🖼️</div>';
-                        }
-                      }}
-                    />
-                  ) : (
-                    <div className="text-9xl">{product.image}</div>
-                  )}
+                  <img
+                    src={getImageSrc()}
+                    alt={product.name}
+                    width={500}
+                    height={500}
+                    className="object-contain rounded-lg max-w-full max-h-[500px]"
+                    loading="lazy"
+                    crossOrigin="anonymous"
+                      onError={(e) => handleImageError(e)}
+                  />
                 </div>
                 <div className="inline-block px-4 py-2 bg-[#654321]/10 dark:bg-[#654A21]/20 text-[#654321] dark:text-[#654A21] rounded-full text-sm font-semibold">
                   {product.category}
