@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Coffee, Leaf, Recycle, TrendingUp, Sparkles, Search, ArrowRight, Zap, ArrowLeft, Handshake, Package, ShoppingCart, Wrench, CheckCircle, X, Bot, MessageCircle, HelpCircle, Star, Lightbulb, Phone, Mail, BookOpen, TrendingDown, Heart, ArrowUp, Calculator, Palette, Home, Info, Settings, Clock, DollarSign, FileText, Users, RotateCcw, Award, ExternalLink, Newspaper } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import CoffeeParticleScene from "@/components/CoffeeParticleScene";
 import InteractiveStats from "@/components/InteractiveStats";
 import FloatingCards from "@/components/FloatingCards";
@@ -81,6 +82,7 @@ const searchResults: SearchResult[] = [
 ];
 
 export default function CoffeeGroundsPage() {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [showAIDI, setShowAIDI] = useState(false);
@@ -88,6 +90,16 @@ export default function CoffeeGroundsPage() {
   const [showNewsWidget, setShowNewsWidget] = useState(true);
   const [isNewsWidgetExpanded, setIsNewsWidgetExpanded] = useState(false);
   const [selectedNewsIndex, setSelectedNewsIndex] = useState(0);
+  
+  // basePath 감지 (GitHub Pages용)
+  const basePath = typeof window !== 'undefined' && window.location.pathname.startsWith('/coffee-grounds-recycling') 
+    ? '/coffee-grounds-recycling' 
+    : '';
+  
+  const navigateTo = (path: string) => {
+    setShowAIDI(false);
+    router.push(basePath + path);
+  };
   
   // 엣지 패널 외부 클릭 시 닫기
   const edgePanelRef = useRef<HTMLDivElement>(null);
@@ -183,7 +195,7 @@ export default function CoffeeGroundsPage() {
     setShowResults(false);
     
     if (result.type === 'page') {
-      window.location.href = result.section;
+      router.push(basePath + result.section);
     } else {
       const element = document.getElementById(result.section);
       if (element) {
@@ -699,10 +711,7 @@ export default function CoffeeGroundsPage() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        setShowAIDI(false);
-                        window.location.href = "/products";
-                      }}
+                      onClick={() => navigateTo("/products")}
                       className="p-2.5 sm:p-3 bg-gradient-to-br from-[#FFF8F0] to-amber-50 dark:from-[#2A1F15] dark:to-amber-900/10 rounded-lg border border-[#A67C52]/30 dark:border-[#C9A372]/30 hover:border-[#8B6F47]/50 dark:hover:border-[#C9A372]/50 hover:bg-gradient-to-br hover:from-amber-50 hover:to-amber-100/50 dark:hover:from-amber-900/20 dark:hover:to-amber-800/15 transition-all text-left min-h-[80px] sm:min-h-[100px] shadow-sm hover:shadow-md"
                     >
                       <Star className="w-4 h-4 text-[#8B6F47] dark:text-[#C9A372] mb-1 sm:mb-2" />
@@ -714,10 +723,7 @@ export default function CoffeeGroundsPage() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        setShowAIDI(false);
-                        window.location.href = "/contact";
-                      }}
+                      onClick={() => navigateTo("/contact")}
                       className="p-3 sm:p-3 bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-900/20 dark:to-amber-800/10 rounded-lg border border-amber-200/60 dark:border-amber-700/40 hover:border-amber-300 dark:hover:border-amber-600/50 hover:bg-gradient-to-br hover:from-amber-100 hover:to-amber-50 dark:hover:from-amber-900/30 dark:hover:to-amber-800/20 transition-all text-left min-h-[80px] sm:min-h-[100px] shadow-sm hover:shadow-md touch-manipulation"
                     >
                       <Lightbulb className="w-4 h-4 text-[#8B6F47] dark:text-[#C9A372] mb-1 sm:mb-2" />
@@ -747,10 +753,7 @@ export default function CoffeeGroundsPage() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        setShowAIDI(false);
-                        window.location.href = "/contact";
-                      }}
+                      onClick={() => navigateTo("/contact")}
                       className="p-2.5 sm:p-3 bg-gradient-to-br from-[#FFF8F0] to-amber-50 dark:from-[#2A1F15] dark:to-amber-900/10 rounded-lg border border-[#A67C52]/30 dark:border-[#C9A372]/30 hover:border-[#8B6F47]/50 dark:hover:border-[#C9A372]/50 hover:bg-gradient-to-br hover:from-amber-50 hover:to-amber-100/50 dark:hover:from-amber-900/20 dark:hover:to-amber-800/15 transition-all text-left min-h-[80px] sm:min-h-[100px] shadow-sm hover:shadow-md"
                     >
                       <MessageCircle className="w-4 h-4 text-[#8B6F47] dark:text-[#C9A372] mb-1 sm:mb-2" />
@@ -762,10 +765,7 @@ export default function CoffeeGroundsPage() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        setShowAIDI(false);
-                        window.location.href = "/detail";
-                      }}
+                      onClick={() => navigateTo("/detail")}
                       className="p-3 sm:p-3 bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-900/20 dark:to-amber-800/10 rounded-lg border border-amber-200/60 dark:border-amber-700/40 hover:border-amber-300 dark:hover:border-amber-600/50 hover:bg-gradient-to-br hover:from-amber-100 hover:to-amber-50 dark:hover:from-amber-900/30 dark:hover:to-amber-800/20 transition-all text-left min-h-[80px] sm:min-h-[100px] shadow-sm hover:shadow-md touch-manipulation"
                     >
                       <BookOpen className="w-4 h-4 text-[#8B6F47] dark:text-[#C9A372] mb-1 sm:mb-2" />
