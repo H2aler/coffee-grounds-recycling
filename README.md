@@ -53,4 +53,4 @@ npm start
 
 ## 📝 라이선스
 
-MIT License
+No License - All rights reserved
