@@ -1,0 +1,35 @@
+{
+  "name": "coffee-grounds-modern",
+  "version": "1.0.0",
+  "description": "최신 기술을 활용한 커피박 재활용 웹페이지",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.5.9",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "framer-motion": "^11.0.0",
+    "three": "^0.160.0",
+    "@react-three/fiber": "^9.4.2",
+    "@react-three/drei": "^10.7.7",
+    "lucide-react": "^0.554.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.3",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.160.0",
+    "typescript": "^5.6.0",
+    "tailwindcss": "^3.4.19",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^15.5.9"
+  }
+}
+
